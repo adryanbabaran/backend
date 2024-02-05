@@ -2,17 +2,21 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
+    category: {
+        type: String,
+        required: [true, 'Category is Required']
+    },
     name: {
         type: String,
-        required: [true, 'Course Name is Required']
+        required: [true, 'Name is Required']
     },
     description: {
         type: String,
-        required: [true, 'Course Description is Required']
+        required: [true, 'Description is Required']
     },
     price: {
         type: Number,
-        required: [true, 'Course Price is Required']
+        required: [true, 'Price is Required']
     },
     isActive: {
         type: Boolean,
