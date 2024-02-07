@@ -184,22 +184,37 @@ module.exports.activateProduct = (req, res) => {
 };
 
 
-// Controller action to search for product name
-/*module.exports.searchProduct = async (req, res) => {
+// Controller action to search for product by name
+module.exports.searchByName = async (req, res) => {
   try {
-
-    console.log(req.body);
 
     const { productName } = req.body;
 
     // Use a regular expression to perform a case-insensitive search
-    const products = await Product.find({
+    const product = await Product.find({
       name: { $regex: productName, $options: 'i' }
     });
 
-    res.json(products);
+    res.json(product);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
-  }
-};*/
+  }};
+
+
+  // Controller action to search for product by price range
+module.exports.searchByPriceRange = async (req, res) => {
+    try {
+  
+      const { productName } = req.body;
+  
+      // Use a regular expression to perform a case-insensitive search
+      const product = await Product.find({
+        name: { $regex: productName, $options: 'i' }
+      });
+  
+      res.json(product);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }};

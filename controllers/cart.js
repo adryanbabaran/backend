@@ -113,3 +113,84 @@ module.exports.updateQuantity = async (req, res) => {
         return res.status(500).send({ error: "Error in updateQuantity" });
     }
 };
+
+
+//[SECTION] Remove Product
+module.exports.removeProduct = async (req, res) => {
+    try {
+        const cartId = req.body.cartId;
+        const productId = req.params.productId;
+
+        // Find the cart by cartId for the user
+        const cart = await Cart.findOne({ _id: cartId, userId: req.user.id });
+
+        if (!cart) {
+            return res.status(404).send({ error: "Cart not found" });
+        }
+
+        // Find the cart item to update
+        const cartItemIndex = cart.cartItems.findIndex(item => item.productId === productId);
+
+        if (cartItemIndex === -1) {
+            return res.status(404).send({ error: `Product with ID ${productId} not found in cart` });
+        }
+        cart.cartItems.splice(cartItemIndex, 1)
+
+        // Recalculate totalPrice
+        cart.totalPrice = cart.cartItems.reduce((total, item) => total + item.subTotal, 0);
+
+        // Save the updated cart
+        await cart.save();
+
+        return res.status(200).send({ message: "Quantity updated successfully", Cart: cart });
+    } catch (err) {
+        console.error("Error in updateQuantity: ", err);
+        return res.status(500).send({ error: "Error in updateQuantity" });
+    }
+};
+
+
+module.exports.clearCart = async (req, res) => {
+    try {
+        const cartId = req.body.cartId;
+    
+        // Find the cart by cartId for the user
+        const cart = await Cart.findOne({ _id: cartId, userId: req.user.id });
+
+        if (!cart) {
+            return res.status(404).send({ error: "Cart not found" });
+        }
+
+        // Find the cart item to update
+        const cartItemElements = cart.cartItems.length;
+
+        cart.cartItems.splice(0, cartItemElements);
+
+        // Recalculate totalPrice
+        cart.totalPrice = 0;
+
+        // Save the updated cart
+        await cart.save();
+
+        return res.status(200).send({ message: "Quantity updated successfully", Cart: cart });
+    } catch (err) {
+        console.error("Error in updateQuantity: ", err);
+        return res.status(500).send({ error: "Error in updateQuantity" });
+    }
+};
+
+
+
+
+
+
+
+/*
+module.exports.clearCart = async (req, res) => {
+
+        const cart = await Cart.find({ cartId: req.body.cartId });
+        cart.cartItems = [];
+       return res.send({Cart: cart})
+
+}
+*/

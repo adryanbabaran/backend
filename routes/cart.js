@@ -17,5 +17,8 @@ router.post("/addToCart", verify, isLoggedIn, cartController.addToCart);
 // [SECTION] Update Quantity
 router.patch("/updateQuantity", verify, isLoggedIn, cartController.updateQuantity);
 
+router.patch("/:productId/removeFromCart", verify, isLoggedIn, cartController.removeProduct);
+
+router.patch("/clearCart", verify, isLoggedIn, cartController.clearCart);
 
 module.exports = router;
