@@ -31,32 +31,45 @@ module.exports.getCart = (req, res) => {
 };
 
 //[SECTION] Add to Cart 
+//[SECTION] Add to Cart 
 module.exports.addToCart = async (req, res) => {
     try {
-        // Find the product by productId
-        const product = await Product.findById(req.body.productId);
-        
-        if (!product) {
-            return res.status(404).send({ error: "Product not found" });
-        }
-        
-        // Calculate the subtotal
-        const subTotal = req.body.quantity * product.price;
-        const cartItems = [{productId: req.body.productId,
-                            quantity: req.body.quantity,
-                            subTotal: subTotal}];
+        let totalPrice = 0;
+        const cartItems = [];
+
+        // Map each item to a Promise that resolves when the product is found
+        const promises = req.body.cartItems.map(async (item) => {
+            // Find the product by productId
+            const product = await Product.findById(item.productId);
+            
+            if (!product) {
+                return res.status(404).send({ error: `Product with ID ${item.productId} not found` });
+            }
+            
+            const subTotal = item.quantity * product.price;
+            totalPrice += subTotal;
+
+            cartItems.push({
+                productId: item.productId,
+                quantity: item.quantity,
+                subTotal: subTotal
+            });
+        });
+
+        // Wait for all promises to resolve
+        await Promise.all(promises);
 
         // Create a new Cart item with the subtotal
         const newCart = new Cart({
             userId: req.user.id,
             cartItems: cartItems,
-            totalPrice: subTotal
+            totalPrice: totalPrice
         });
 
         // Save the new cart item
         await newCart.save();
 
-        return res.status(201).send({ message: "Product Added Successfully", Cart: newCart });
+        return res.status(201).send({ message: "Product(s) Added Successfully", Cart: newCart });
     } catch (err) {
         console.error("Error in add: ", err);
         return res.status(500).send({ error: "Error in add" });
