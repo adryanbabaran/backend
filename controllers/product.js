@@ -7,19 +7,34 @@ const auth = require("../auth");
 //[SECTION] Create Product 
 module.exports.createProduct = (req,res) => {
 
-		let newProduct = new Product({
+    try{
+            let newProduct = new Product({
             category: req.body.category,
 			name : req.body.name,
 			description : req.body.description,
 			price : req.body.price
 		});
 
-		return newProduct.save()
-				.then((product) => res.status(201).send({ message: "Registered Successfully" }))
-				.catch(err => {
-					console.error("Error in saving: ", err)
-					return res.status(500).send({ error: "Error in save"})
-				})
+        return Product.find({name : req.body.name}).then(product => {
+
+            if (product.length > 0){
+                return res.status(409).send({ message: "Product already exists"})
+            } else {
+                return newProduct.save()
+                .then((product) => res.status(201).send({ message: "Registered Successfully" }))
+                .catch(err => {
+                    console.error("Error in add: ", err)
+                    return res.status(500).send({ error: "Error in save"})
+                })
+            }
+        })
+
+    }  catch (err) {
+        console.error("Error in add: ", err);
+        return res.status(500).send({ error: "Error in add" });
+    }
+
+		
 };
 
 //[SECTION] Get all products

@@ -15,7 +15,7 @@ router.post("/", verify, verifyAdmin, productController.createProduct);
 router.get("/all", verify, verifyAdmin, productController.getAllProducts);
 
 // [SECTION] Get All Active
-router.get("/", productController.getAllActive );
+router.get("/active", productController.getAllActive );
 
 // [SECTION] Retrieve single product
 router.get("/:productId", productController.getProduct );
@@ -24,7 +24,7 @@ router.get("/:productId", productController.getProduct );
 router.patch("/:productId", verify, verifyAdmin, productController.updateProduct );
 
 //[SECTION] Route for product archive/activate
-router.patch("/:productId/archive", verify, verifyAdmin, productController.archiveProduct);
-router.patch("/:productId/activate", verify, verifyAdmin, productController.activateProduct);
+router.patch("/archive/:productId", verify, verifyAdmin, productController.archiveProduct);
+router.patch("/activate/:productId", verify, verifyAdmin, productController.activateProduct);
 
 module.exports = router;

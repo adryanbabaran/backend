@@ -29,8 +29,7 @@ module.exports.getCart = (req, res) => {
     });
 
 };
-
-//[SECTION] Add to Cart 
+ 
 //[SECTION] Add to Cart 
 module.exports.addToCart = async (req, res) => {
     try {
@@ -73,5 +72,44 @@ module.exports.addToCart = async (req, res) => {
     } catch (err) {
         console.error("Error in add: ", err);
         return res.status(500).send({ error: "Error in add" });
+    }
+};
+
+
+//[SECTION] Update Quantity
+module.exports.updateQuantity = async (req, res) => {
+    try {
+        const { cartId, productId, quantity } = req.body;
+
+        // Find the cart by cartId for the user
+        const cart = await Cart.findOne({ _id: cartId, userId: req.user.id });
+
+        if (!cart) {
+            return res.status(404).send({ error: "Cart not found" });
+        }
+
+        // Find the cart item to update
+        const cartItemIndex = cart.cartItems.findIndex(item => item.productId === productId);
+
+        if (cartItemIndex === -1) {
+            return res.status(404).send({ error: `Product with ID ${productId} not found in cart` });
+        }
+
+        const product = await Product.findById(productId);
+
+        // Update quantity and recalculate subTotal
+        cart.cartItems[cartItemIndex].quantity = quantity;
+        cart.cartItems[cartItemIndex].subTotal = quantity * product.price;
+
+        // Recalculate totalPrice
+        cart.totalPrice = cart.cartItems.reduce((total, item) => total + item.subTotal, 0);
+
+        // Save the updated cart
+        await cart.save();
+
+        return res.status(200).send({ message: "Quantity updated successfully", Cart: cart });
+    } catch (err) {
+        console.error("Error in updateQuantity: ", err);
+        return res.status(500).send({ error: "Error in updateQuantity" });
     }
 };

@@ -12,7 +12,10 @@ const router = express.Router();
 router.get("/", verify, isLoggedIn, cartController.getCart);
 
 // [SECTION] Add to Cart
-router.post("/add", verify, isLoggedIn, cartController.addToCart);
+router.post("/addToCart", verify, isLoggedIn, cartController.addToCart);
+
+// [SECTION] Update Quantity
+router.patch("/updateQuantity", verify, isLoggedIn, cartController.updateQuantity);
 
 
 module.exports = router;
