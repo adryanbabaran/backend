@@ -72,7 +72,7 @@ module.exports.getAllActive = (req, res) => {
 
 
 module.exports.getProduct = (req, res) => {
-    const courseId = req.params.productId;
+    const productId = req.params.productId;
 
     Product.findById(productId)
     .then(product => {
