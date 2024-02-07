@@ -70,24 +70,21 @@ module.exports.getAllActive = (req, res) => {
 
 };
 
-// Controller action to search for product name
-module.exports.searchProduct = async (req, res) => {
-  try {
 
-    console.log(req.body);
+module.exports.getProduct = (req, res) => {
+    const courseId = req.params.productId;
 
-    const { productName } = req.body;
-
-    // Use a regular expression to perform a case-insensitive search
-    const products = await Product.find({
-      name: { $regex: productName, $options: 'i' }
-    });
-
-    res.json(products);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+    Product.findById(productId)
+    .then(product => {
+        if (!product) {
+            return res.status(404).send({ error: 'Product not found' });
+        }
+        return res.status(200).send({ product });
+    })
+    .catch(err => {
+        console.error("Error in fetching the product: ", err)
+        return res.status(500).send({ error: 'Failed to fetch product' });
+    })
 };
 
 //[SECTION] Update a Product
@@ -170,3 +167,24 @@ module.exports.activateProduct = (req, res) => {
         return res.status(500).send({ error: 'Failed to activating a product' })
     });
 };
+
+
+// Controller action to search for product name
+/*module.exports.searchProduct = async (req, res) => {
+  try {
+
+    console.log(req.body);
+
+    const { productName } = req.body;
+
+    // Use a regular expression to perform a case-insensitive search
+    const products = await Product.find({
+      name: { $regex: productName, $options: 'i' }
+    });
+
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};*/

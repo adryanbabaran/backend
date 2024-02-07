@@ -9,7 +9,7 @@ const { verify, verifyAdmin, isLoggedIn } = require("../auth");
 const router = express.Router();
 
 // [SECTION] Create Product
-router.post("/createProduct", verify, verifyAdmin, productController.createProduct);
+router.post("/", verify, verifyAdmin, productController.createProduct);
 
 //[SECTION] Route for retrieving all products
 router.get("/all", verify, verifyAdmin, productController.getAllProducts);
@@ -18,10 +18,10 @@ router.get("/all", verify, verifyAdmin, productController.getAllProducts);
 router.get("/", productController.getAllActive );
 
 // [SECTION] Retrieve single product
-router.post("/search", productController.searchProduct );
+router.get("/:productId", productController.getProduct );
 
 // [SECTION] Update product information
-router.patch("/:productId/update", verify, verifyAdmin, productController.updateProduct );
+router.patch("/:productId", verify, verifyAdmin, productController.updateProduct );
 
 //[SECTION] Route for product archive/activate
 router.patch("/:productId/archive", verify, verifyAdmin, productController.archiveProduct);
