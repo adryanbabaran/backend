@@ -188,32 +188,42 @@ module.exports.activateProduct = (req, res) => {
 module.exports.searchByName = async (req, res) => {
   try {
 
-    const { productName } = req.body;
+    const productName = req.body.productName;
+
+    if (!productName){  return res.status(400).json({ error: 'Product name id required in the request body.' });
+        }
 
     // Use a regular expression to perform a case-insensitive search
     const product = await Product.find({
       name: { $regex: productName, $options: 'i' }
     });
 
-    res.json(product);
+    if (product.length === 0){  return res.status(404).json({ error: 'Product not found.' });
+      } else { res.json(product);}
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }};
 
 
-  // Controller action to search for product by price range
+// Controller action to search for product by price range
 module.exports.searchByPriceRange = async (req, res) => {
     try {
-  
-      const { productName } = req.body;
-  
-      // Use a regular expression to perform a case-insensitive search
+    
+      const minPrice = req.body.minPrice;
+      const maxPrice = req.body.maxPrice;
+
+      if (!minPrice || !maxPrice){  return res.status(400).json({ error: 'Please input valid value in the request body.' });
+        }
+
       const product = await Product.find({
-        name: { $regex: productName, $options: 'i' }
-      });
-  
-      res.json(product);
+            price: { $gte: minPrice, $lte: maxPrice }
+        });
+
+      if (product.length === 0){  return res.status(404).json({ error: 'Product not found.' });
+        } else { res.json(product);}
+
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
