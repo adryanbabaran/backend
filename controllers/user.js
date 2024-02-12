@@ -4,8 +4,44 @@ const bcrypt = require('bcrypt');
 const User = require("../models/User");
 const auth = require("../auth");
 
+const emailController = require("../controllers/email");
+
 
 //[SECTION] User registration
+/*module.exports.registerUser = async (req, res) => {
+    try {
+        console.log('Registering user...');
+        if (!req.body.email.includes("@")) {
+            return res.status(400).send({ error: "Email invalid" });
+        } else if (req.body.mobileNo.length !== 11) {
+            return res.status(400).send({ error: "Mobile number invalid" });
+        } else if (req.body.password.length < 8) {
+            return res.status(400).send({ error: "Password must be at least 8 characters" });
+        } else {
+            let newUser = new User({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                mobileNo: req.body.mobileNo,
+                password: bcrypt.hashSync(req.body.password, 10)
+            });
+
+            await newUser.save();
+            console.log('User saved successfully.');
+
+            // Call the sendVerificationEmail function here
+            console.log('Sending verification email...');
+            await emailController.sendVerificationEmail(req.body.email);
+            console.log('Verification email sent successfully.');
+
+            return res.status(201).send({ message: "Registered Successfully" });
+        }
+    } catch (error) {
+        console.error("Error in registering user:", error);
+        return res.status(500).send({ error: "Error in user registration" });
+    }
+};
+*/
 module.exports.registerUser = (req,res) => {
 
 	if (!req.body.email.includes("@")){
