@@ -8,7 +8,7 @@ const emailController = require("../controllers/email");
 
 
 //[SECTION] User registration
-/*module.exports.registerUser = async (req, res) => {
+module.exports.registerUser = async (req, res) => {
     try {
         console.log('Registering user...');
         if (!req.body.email.includes("@")) {
@@ -41,7 +41,8 @@ const emailController = require("../controllers/email");
         return res.status(500).send({ error: "Error in user registration" });
     }
 };
-*/
+
+/*
 module.exports.registerUser = (req,res) => {
 
 	if (!req.body.email.includes("@")){
@@ -74,6 +75,7 @@ module.exports.registerUser = (req,res) => {
 		
 	}
 };
+*/
 
 //[SECTION] User authentication
 module.exports.loginUser = (req,res) => {
@@ -154,6 +156,11 @@ module.exports.updatePassword = async (req, res) => {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     await User.findByIdAndUpdate(id, { password: hashedPassword });
+
+	// Call the sendVerificationEmail function here
+	console.log('Sending verification email...');
+	await emailController.passwordUpdated(req.user.email);
+	console.log('Verification email sent successfully.');
 
     res.status(200).json({ message: 'Password reset successfully' });
   } catch (error) {
