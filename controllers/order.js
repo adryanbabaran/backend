@@ -34,7 +34,11 @@ module.exports.checkout = async (req, res) => {
 	        // Save the new order
 	        await newOrder.save();
 
-            await Cart.deleteOne({ userId : req.user.id })
+            cart.cartItems = [];
+            cart.totalPrice = 0;
+            
+            await cart.save();
+            // await Cart.deleteOne({ userId : req.user.id })
 
 	        return res.status(201).send({ message: 'Order checkout successful',
 	        							order: newOrder });
