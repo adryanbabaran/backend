@@ -13,16 +13,16 @@ module.exports.checkout = async (req, res) => {
     		return res.status(403).send({Error : "Admin accounts cannot checkout"})
     	} else{
 	        // Find the cart by cartId and userId
-	        const cart = await Cart.findOne({ _id: req.body.cartId, userId: req.user.id });
+	        const cart = await Cart.findOne({ userId: req.user.id });
 
 	        if (!cart) {
-	            return res.status(404).send({ message: 'Cart not found' });
+	            return res.status(404).send({ message: "Cart not found. Please add products to cart." });
 	        }
 
 	        // Check if the cart is empty
 	        if (cart.cartItems.length === 0) {
 	            return res.status(409).send({ message: 'Cart is empty' });
-	        }
+	        } else {
 
 	        // Create a new order with cartItems and totalPrice
 	        const newOrder = new Order({
@@ -34,10 +34,13 @@ module.exports.checkout = async (req, res) => {
 	        // Save the new order
 	        await newOrder.save();
 
+            await Cart.deleteOne({ userId : req.user.id })
+
 	        return res.status(201).send({ message: 'Order checkout successful',
-	        							order: newOrder }
-	        );
+	        							order: newOrder });
+            }
     	}
+
 	} catch (err) {
         console.error('Error in checkout: ', err);
         return res.status(500).send({ error: 'Error checking out' });
