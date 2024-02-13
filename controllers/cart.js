@@ -26,71 +26,57 @@ module.exports.getCart = (req, res) => {
 
 };
  
-//[SECTION] Add to Cart 
+//[SECTION] Add to Cart
 module.exports.addToCart = async (req, res) => {
-    try {   
-        // Find the cart for the user
-        const cart = await Cart.findOne({ userId: req.user.id });
+    try {
+        const productId = req.body.productId;
+        const quantity = req.body.quantity;
 
-        let totalPrice = 0;
-        const cartItems = [];
-        let error = false;
-
-        // Map each item to a Promise that resolves when the product is found
-        const promises = req.body.cartItems.map(async (item) => {
-            // Find the product by productId
-            const product = await Product.findById(item.productId);
-            if (!product && cart) {
-                error = true;
-                return res.status(404).send({ error: `Failed to add product(s). Product with ID ${item.productId} not found.`,
-                    Cart : cart });
-            }
-            if (!product && !cart) {
-                error = true;
-                return res.status(404).send({ error: `Failed to create cart. Product with ID ${item.productId} not found.`});
-            }
-            if (product.isActive) {
-
-                    const subTotal = item.quantity * product.price;
-                    totalPrice += subTotal;
-
-                    cartItems.push({
-                        productId: item.productId,
-                        quantity: item.quantity,
-                        subTotal: subTotal
-                    });
-            } else {
-                error = true;
-                return res.status(404).send({ error: `Product with ID ${item.productId} not available.`});
-            }
-            
-            
-        });
-
-        // Wait for all promises to resolve
-        await Promise.all(promises);
-
-        if (error) {return;}
-        if (cart) {
-            // Update existing cart with new cartItems
-            cart.cartItems = cart.cartItems.concat(cartItems);
-            cart.totalPrice += totalPrice;
-            await cart.save();
-
-            return res.status(201).send({ message: "Product(s) Added Successfully", Cart: cart });
-        } else {
-            // Create a new Cart item with the subtotal
-            const newCart = new Cart({
-                userId: req.user.id,
-                cartItems: cartItems,
-                totalPrice: totalPrice
-            });
-
-            // Save the new cart item
-            await newCart.save();
-
-            return res.status(201).send({ message: "Cart Created Successfully", Cart: newCart });
+        // Check if the product with the given productId exists and is active
+        const product = await Product.findById(productId);
+        if (!product || !product.isActive) {
+            return res.status(404).send({ error: `Product with ID ${productId} not available or not active.` });
         }
+
+        // Find the cart for the user
+        let cart = await Cart.findOne({ userId: req.user.id });
+
+        if (cart) {
+            // Check if the product already exists in the cart
+            const existingItemIndex = cart.cartItems.findIndex(item => item.productId === productId);
+            if (existingItemIndex !== -1) {
+                // If the product exists, update its quantity and subTotal
+                cart.cartItems[existingItemIndex].quantity += quantity;
+                cart.cartItems[existingItemIndex].subTotal = cart.cartItems[existingItemIndex].quantity * product.price;
+            } else {
+                // If the product doesn't exist, add it to the cart
+                const subTotal = quantity * product.price;
+                cart.cartItems.push({
+                    productId: productId,
+                    quantity: quantity,
+                    subTotal: subTotal
+                });
+            }
+            // Recalculate totalPrice
+            cart.totalPrice = cart.cartItems.reduce((total, item) => total + item.subTotal, 0);
+        } else {
+            // Create a new cart
+            const subTotal = quantity * product.price;
+            cart = new Cart({
+                userId: req.user.id,
+                cartItems: [{
+                    productId: productId,
+                    quantity: quantity,
+                    subTotal: subTotal
+                }],
+                totalPrice: subTotal
+            });
+        }
+
+        // Save or update the cart
+        await cart.save();
+
+        return res.status(201).send({ message: "Product(s) Added Successfully", Cart: cart });
     } catch (err) {
         console.error("Error in addToCart: ", err);
         return res.status(500).send({ error: "Error in addToCart" });
