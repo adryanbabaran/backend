@@ -1,9 +1,5 @@
-// [SECTION] Dependencies and Modules
-const bcrypt = require('bcrypt');
-
 const Product = require("../models/Product");
 const Cart = require("../models/Cart");
-const auth = require("../auth");
 
 
 //[SECTION] Get all products
@@ -195,19 +191,3 @@ module.exports.clearCart = async (req, res) => {
         return res.status(500).send({ error: "Error in clearing cart" });
     }
 };
-
-
-
-
-
-
-
-/*
-module.exports.clearCart = async (req, res) => {
-
-        const cart = await Cart.find({ cartId: req.body.cartId });
-        cart.cartItems = [];
-       return res.send({Cart: cart})
-
-}
-*/

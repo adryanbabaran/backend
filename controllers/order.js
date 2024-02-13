@@ -1,9 +1,6 @@
 // [SECTION] Dependencies and Modules
-const bcrypt = require('bcrypt');
-
 const Cart = require("../models/Cart");
 const Order = require("../models/Order");
-const auth = require("../auth");
 
 //[SECTION] Checkout
 module.exports.checkout = async (req, res) => {

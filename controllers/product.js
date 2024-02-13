@@ -1,8 +1,5 @@
 // [SECTION] Dependencies and Modules
-const bcrypt = require('bcrypt');
-
 const Product = require("../models/Product");
-const auth = require("../auth");
 
 //[SECTION] Create Product 
 module.exports.createProduct = (req,res) => {
