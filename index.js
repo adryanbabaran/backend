@@ -7,7 +7,7 @@ const userRoutes = require("./routes/user");
 const productRoutes = require("./routes/product");
 const cartRoutes = require("./routes/cart");
 const orderRoutes = require("./routes/order");
-const port = 4000;
+const port = 4002;
 
 const app = express();
 
@@ -27,10 +27,10 @@ mongoose.connect("mongodb+srv://admin:admin123@b337.ytyxk3v.mongodb.net/Capstone
 mongoose.connection.once("open", () => console.log("Now connected to MongoDB Atlas"));
 
 // [SECTION] Backend Routes
-app.use("/users", userRoutes);
-app.use("/products", productRoutes);
-app.use("/cart", cartRoutes);
-app.use("/orders", orderRoutes);
+app.use("/b2/users", userRoutes);
+app.use("/b2/products", productRoutes);
+app.use("/b2/cart", cartRoutes);
+app.use("/b2/orders", orderRoutes);
 
 // [SECTION] Server Gateway Response
 if(require.main === module){
