@@ -49,15 +49,22 @@ module.exports.addToCart = async (req, res) => {
                 error = true;
                 return res.status(404).send({ error: `Failed to create cart. Product with ID ${item.productId} not found.`});
             }
-            
-            const subTotal = item.quantity * product.price;
-            totalPrice += subTotal;
+            if (product.isActive) {
 
-            cartItems.push({
-                productId: item.productId,
-                quantity: item.quantity,
-                subTotal: subTotal
-            });
+                    const subTotal = item.quantity * product.price;
+                    totalPrice += subTotal;
+
+                    cartItems.push({
+                        productId: item.productId,
+                        quantity: item.quantity,
+                        subTotal: subTotal
+                    });
+            } else {
+                error = true;
+                return res.status(404).send({ error: `Product with ID ${item.productId} not available.`});
+            }
+            
+            
         });
 
         // Wait for all promises to resolve
