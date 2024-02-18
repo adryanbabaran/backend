@@ -211,6 +211,8 @@ module.exports.searchByPriceRange = async (req, res) => {
       const minPrice = req.body.minPrice;
       const maxPrice = req.body.maxPrice;
 
+      console.log(maxPrice);
+
       if (!minPrice || !maxPrice){  return res.status(400).json({ error: 'Please input valid value in the request body.' });
         }
 

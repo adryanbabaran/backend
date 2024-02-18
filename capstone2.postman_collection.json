@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"admin@mail.com\",\r\n    \"password\": \"admin123\"\r\n}",
+							"raw": "{\r\n    \"email\":\"huntercustomer@mail.com\",\r\n    \"password\": \"royalcaninonli\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,13 +24,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/users/login",
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/users/login",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
 							],
-							"port": "4000",
 							"path": [
+								"b2",
 								"users",
 								"login"
 							]
@@ -39,10 +43,156 @@
 					"response": []
 				},
 				{
+					"name": "update-password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZDFlZDk0NWNlNDhjNmQ2YzNhOWU0OSIsImVtYWlsIjoiaHVudGVyY3VzdG9tZXJAbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzA4MjU2Njg4fQ._gIKQyD4jdfZ5zRPK1TT-J6YP6HstbOIGsIyGgyOhhI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\": \"royalcaninonli!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/users/update-password",
+							"protocol": "http",
+							"host": [
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"b2",
+								"users",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set-as-admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWUyNzRlMWE0MTEzMmJiNGZlNSIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDgyNTY5ODZ9.GgepEUOjo6niSQ_jkMX2LUZ8SRWvVLzPF-mky605m9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\": \"royalcaninonli!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/users/65ca1a9d773d5b42f6b71eba/set-as-admin",
+							"protocol": "http",
+							"host": [
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"b2",
+								"users",
+								"65ca1a9d773d5b42f6b71eba",
+								"set-as-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "(register)",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"hunter\",\r\n    \"lastName\": \"gabriel\",\r\n    \"email\": \"huntercustomer@mail.com\",\r\n    \"mobileNo\":\"09123456789\",\r\n    \"password\": \"royalcaninonli\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/users/",
+							"protocol": "http",
+							"host": [
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"b2",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZDFlZDk0NWNlNDhjNmQ2YzNhOWU0OSIsImVtYWlsIjoiaHVudGVyY3VzdG9tZXJAbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzA4MjU2Njg4fQ._gIKQyD4jdfZ5zRPK1TT-J6YP6HstbOIGsIyGgyOhhI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/users/details",
+							"protocol": "http",
+							"host": [
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"b2",
+								"users",
+								"details"
+							]
+						}
 					},
 					"response": []
 				}
@@ -52,7 +202,7 @@
 			"name": "products",
 			"item": [
 				{
-					"name": "search",
+					"name": "searchByName",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -66,15 +216,19 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/products/search",
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/products/searchByName",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
 							],
-							"port": "4000",
 							"path": [
+								"b2",
 								"products",
-								"search"
+								"searchByName"
 							]
 						}
 					},
@@ -87,7 +241,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"productName\": \"League of l\"\r\n}",
+							"raw": "{\r\n    \"minPrice\":0,\r\n    \"maxPrice\": 100\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -95,15 +249,19 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/products/searchByName",
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/products/searchByPrice",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
 							],
-							"port": "4000",
 							"path": [
+								"b2",
 								"products",
-								"searchByName"
+								"searchByPrice"
 							]
 						}
 					},
@@ -126,7 +284,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"League of Ancients\",\r\n    \"description\": \"Experience League and DOTA\",\r\n    \"price\": 910\r\n}",
+							"raw": "{\r\n    \"name\": \"not sid meier's, but civ\",\r\n    \"description\": \"Become Ruler of the World by establishing and leading a civilization from the dawn of man into the space age: Wage war, conduct diplomacy, discover new technologies, go head-to-head with some of history’s greatest leaders and build the most powerful empire the world has ever known.\",\r\n    \"price\": 500\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -134,15 +292,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/products/65c0e0fbd6c051bf8d53343b",
+							"raw": "http:///ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/products/65c34c2bf4879cd269bd3d2b",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
 							"path": [
+								"ec2-3-23-95-145.us-east-2.compute.amazonaws.com",
+								"b2",
 								"products",
-								"65c0e0fbd6c051bf8d53343b"
+								"65c34c2bf4879cd269bd3d2b"
 							]
 						}
 					},
@@ -173,15 +329,19 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/products/activate/65c326409b68a7f058f81682",
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/products/archive/65c326409b68a7f058f81682",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
 							],
-							"port": "4000",
 							"path": [
+								"b2",
 								"products",
-								"activate",
+								"archive",
 								"65c326409b68a7f058f81682"
 							]
 						}
@@ -213,13 +373,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/products/",
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/products/",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
 							],
-							"port": "4000",
 							"path": [
+								"b2",
 								"products",
 								""
 							]
@@ -230,8 +394,102 @@
 				{
 					"name": "all",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWUyNzRlMWE0MTEzMmJiNGZlNSIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDgyNTY5ODZ9.GgepEUOjo6niSQ_jkMX2LUZ8SRWvVLzPF-mky605m9w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/products/all",
+							"protocol": "http",
+							"host": [
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"b2",
+								"products",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "active",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWUyNzRlMWE0MTEzMmJiNGZlNSIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDgyNTY5ODZ9.GgepEUOjo6niSQ_jkMX2LUZ8SRWvVLzPF-mky605m9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/products/active",
+							"protocol": "http",
+							"host": [
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"b2",
+								"products",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": ":productId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWUyNzRlMWE0MTEzMmJiNGZlNSIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDgyNTY5ODZ9.GgepEUOjo6niSQ_jkMX2LUZ8SRWvVLzPF-mky605m9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/products/65c0e0c4d6c051bf8d533438",
+							"protocol": "http",
+							"host": [
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"b2",
+								"products",
+								"65c0e0c4d6c051bf8d533438"
+							]
+						}
 					},
 					"response": []
 				}
@@ -243,19 +501,31 @@
 				{
 					"name": "cart",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWUyNzRlMWE0MTEzMmJiNGZlNSIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDgyNTg5Njh9.vcEHerecbqj_t3QzbVHFyI3VkRFpbaD81v4XNXNogWo",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/users/cart/",
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/cart",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
 							],
-							"port": "4000",
 							"path": [
-								"users",
-								"cart",
-								""
+								"b2",
+								"cart"
 							]
 						}
 					},
@@ -269,7 +539,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWIzNzRlMWE0MTEzMmJiNGZlMyIsImVtYWlsIjoiY3VzdG9tZXJAbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzA3NjY0NzYyfQ.088vQt-6PLWDe2amMOzCIAlDf9oJ1Emt0cYiX35d7tc",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWUyNzRlMWE0MTEzMmJiNGZlNSIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDgyNTg5Njh9.vcEHerecbqj_t3QzbVHFyI3VkRFpbaD81v4XNXNogWo",
 									"type": "string"
 								}
 							]
@@ -278,7 +548,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"cartItems\":[{\r\n\"productId\":\"65c326b89b68a7f058f81684\",\r\n\"quantity\": 10\r\n},\r\n{\r\n\"productId\":\"65c34c0df4879cd269bd3d29\",\r\n\"quantity\": 1\r\n}]}",
+							"raw": "{\r\n\"productId\":\"65c34c0df4879cd269bd3d29\",\r\n\"quantity\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -286,13 +556,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/cart/addToCart",
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/cart/addToCart",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
 							],
-							"port": "4000",
 							"path": [
+								"b2",
 								"cart",
 								"addToCart"
 							]
@@ -308,7 +582,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWUyNzRlMWE0MTEzMmJiNGZlNSIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDcyMTUwMTZ9.fsxrjYhH7dvSGTHjPDczrgZbi4Sh6TFFVXUJ9NFK3I8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWUyNzRlMWE0MTEzMmJiNGZlNSIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDgyNTg5Njh9.vcEHerecbqj_t3QzbVHFyI3VkRFpbaD81v4XNXNogWo",
 									"type": "string"
 								}
 							]
@@ -317,7 +591,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"cartId\" : \"65c3562b350d8b209ef8f67b\",\r\n    \"productId\": \"65c3259c9b68a7f058f8167e\",\r\n    \"quantity\": \"2\"\r\n}",
+							"raw": "{\r\n    \"productId\": \"65c34c0df4879cd269bd3d29\",\r\n    \"quantity\": \"4\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -325,13 +599,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/cart/updateQuantity",
+							"raw": "http://ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/cart/updateQuantity",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-3-23-95-145",
+								"us-east-2",
+								"compute",
+								"amazonaws",
+								"com"
 							],
-							"port": "4000",
 							"path": [
+								"b2",
 								"cart",
 								"updateQuantity"
 							]
@@ -347,7 +625,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWIzNzRlMWE0MTEzMmJiNGZlMyIsImVtYWlsIjoiY3VzdG9tZXJAbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzA3NjY0NzYyfQ.088vQt-6PLWDe2amMOzCIAlDf9oJ1Emt0cYiX35d7tc",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWUyNzRlMWE0MTEzMmJiNGZlNSIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDgyNTg5Njh9.vcEHerecbqj_t3QzbVHFyI3VkRFpbaD81v4XNXNogWo",
 									"type": "string"
 								}
 							]
@@ -355,15 +633,44 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/cart/clearCart",
+							"raw": "http:////ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/cart/clearCart",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
 							"path": [
+								"",
+								"ec2-3-23-95-145.us-east-2.compute.amazonaws.com",
+								"b2",
 								"cart",
 								"clearCart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeFromCart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWUyNzRlMWE0MTEzMmJiNGZlNSIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDgyNTg5Njh9.vcEHerecbqj_t3QzbVHFyI3VkRFpbaD81v4XNXNogWo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http:////ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/cart/65c34c0df4879cd269bd3d29/removeFromCart",
+							"protocol": "http",
+							"path": [
+								"",
+								"ec2-3-23-95-145.us-east-2.compute.amazonaws.com",
+								"b2",
+								"cart",
+								"65c34c0df4879cd269bd3d29",
+								"removeFromCart"
 							]
 						}
 					},
@@ -382,7 +689,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWUyNzRlMWE0MTEzMmJiNGZlNSIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDcyMTUwMTZ9.fsxrjYhH7dvSGTHjPDczrgZbi4Sh6TFFVXUJ9NFK3I8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZDFlZDk0NWNlNDhjNmQ2YzNhOWU0OSIsImVtYWlsIjoiaHVudGVyY3VzdG9tZXJAbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzA4MjU5NjgzfQ.gMQbBKHM0-Cf5pueb6Y84ap4eo10lsn2sgpW8eruqSA",
 									"type": "string"
 								}
 							]
@@ -399,13 +706,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/orders/checkout",
+							"raw": "http:////ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/orders/checkout",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
 							"path": [
+								"",
+								"ec2-3-23-95-145.us-east-2.compute.amazonaws.com",
+								"b2",
 								"orders",
 								"checkout"
 							]
@@ -421,6 +727,35 @@
 							"bearer": [
 								{
 									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZDFlZDk0NWNlNDhjNmQ2YzNhOWU0OSIsImVtYWlsIjoiaHVudGVyY3VzdG9tZXJAbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzA4MjU5NjgzfQ.gMQbBKHM0-Cf5pueb6Y84ap4eo10lsn2sgpW8eruqSA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http:////ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/orders/my-orders",
+							"protocol": "http",
+							"path": [
+								"",
+								"ec2-3-23-95-145.us-east-2.compute.amazonaws.com",
+								"b2",
+								"orders",
+								"my-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all-orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
 									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzBiZWUyNzRlMWE0MTEzMmJiNGZlNSIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDcyMTUwMTZ9.fsxrjYhH7dvSGTHjPDczrgZbi4Sh6TFFVXUJ9NFK3I8",
 									"type": "string"
 								}
@@ -429,13 +764,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:4000/orders/all-orders",
+							"raw": "http:////ec2-3-23-95-145.us-east-2.compute.amazonaws.com/b2/orders/all-orders",
 							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
 							"path": [
+								"",
+								"ec2-3-23-95-145.us-east-2.compute.amazonaws.com",
+								"b2",
 								"orders",
 								"all-orders"
 							]
