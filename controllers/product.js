@@ -105,6 +105,7 @@ module.exports.updateProduct = (req, res)=>{
     const productId = req.params.productId;
 
     let updatedProduct = {
+        category: req.body.category,
         name: req.body.name,
         description: req.body.description,
         price: req.body.price
