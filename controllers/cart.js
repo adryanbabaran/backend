@@ -9,7 +9,7 @@ module.exports.getCart = (req, res) => {
     .then(cartItems => {
 
         if(cartItems.length > 0){
-            return res.status(200).send({ cartItems });
+            return res.status(200).send(cartItems);
         }
         else{
             return res.status(200).send({ message: 'Your cart is empty.' });
