@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended : true }));
 app.use(cors());
 
 // [SECTION] Database Connection
-mongoose.connect("mongodb+srv://admin:admin123@b337.ytyxk3v.mongodb.net/Capstone2-API?retryWrites=true&w=majority",
+mongoose.connect("",
 		{
 			useNewUrlParser : true,
 			useUnifiedTopology : true
